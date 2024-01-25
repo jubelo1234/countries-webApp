@@ -28,3 +28,14 @@ input[type="search"]::-webkit-search-clear-button {
 .bords{
     border-top: 2px solid hsl(0, 0%, 98%);
 }
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-clear-button {
+  -webkit-appearance: none;
+}
+
+input[type="search"] {
+  -webkit-appearance: none;
+  text-decoration: none;
+}

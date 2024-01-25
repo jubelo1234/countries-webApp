@@ -90,7 +90,7 @@ function App() {
           <h4>{`${!theme ? "Dark" : "Light"} Mode`}</h4>
         </div>
       </div>
-      <div className="pt-[30px] lap:pt-[50px] px-[5vw]">
+      <div className="pt-[30px] lap:pt-[50px] px-[5vw] max-w-[1710px] mx-auto">
         <div className="flex items-baseline flex-col justify-start gap-6 lap:flex-row lap:justify-between">
           <Search theme={theme} />
           <Region theme={theme} />
