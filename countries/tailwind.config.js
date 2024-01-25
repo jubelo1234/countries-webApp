@@ -7,6 +7,15 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
+      boxShadow: {
+        '3xl': '0 5px 15px rgba(143, 160, 193, 0.14)',
+      },
+      screens: {
+        exsm: "350px",
+        tab: "768px",
+        lap: "1125px",
+        tlap: "1467px"
+      },
       fontFamily: {
         sans: ["Nunito Sans", "sans-serif"],
       },
