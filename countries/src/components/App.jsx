@@ -49,7 +49,7 @@ function App() {
   }
 
   const testData1 = countryData.find((item) =>
-    item.name.toLowerCase().includes("nepal")
+    item.name.toLowerCase().includes("switzerland")
   );
 
 
@@ -72,7 +72,7 @@ function App() {
         </div>
       </div>
       <div className="pt-[30px] lap:pt-[50px] px-[5vw] max-w-[1710px] mx-auto">
-        <div className=" hidden items-baseline flex-col justify-start mt-12 gap-6 lap:flex-row lap:justify-between">
+        <div className=" mb-16 hidden items-baseline flex-col justify-start  gap-6 lap:flex-row lap:justify-between">
           <Search theme={theme} />
           <Region theme={theme} />
         </div>

@@ -12,6 +12,7 @@ export default {
       },
       screens: {
         exsm: "350px",
+        eexsm: "290px",
         tab: "768px",
         lap: "1125px",
         tlap: "1467px"

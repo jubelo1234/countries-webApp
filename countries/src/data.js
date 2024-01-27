@@ -14134,7 +14134,7 @@
     "independent": false
   },
   {
-    "name": "Korea (Republic of)",
+    "name": "South Korea",
     "topLevelDomain": [".kr"],
     "alpha2Code": "KR",
     "alpha3Code": "KOR",
