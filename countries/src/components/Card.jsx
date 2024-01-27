@@ -9,9 +9,9 @@ function Card({data, theme}) {
             <div className={`px-6 pb-12 text-left ${!theme && "bords"}`}>
                 <h2 className="pb-[18px] pt-7 text-[20px] exsm:text-[20px] font-extrabold capitalize">{data.name}</h2>
                 <div className="flex flex-col items-baseline font-medium justify-start gap-2 text-[14px] exsm:text-[16px]">
-                    <p>Population:  <span className="font-light">{population.toLocaleString()}</span></p>
-                    <p>Region:  <span className="font-light">{data.region}</span></p>
-                    <p>Capital:  <span className="font-light">{data.capital}</span></p>
+                    <p>Population:  <span className="font-extralight">{population.toLocaleString()}</span></p>
+                    <p>Region:  <span className="font-extralight">{data.region}</span></p>
+                    <p>Capital:  <span className="font-extralight">{data.capital}</span></p>
                 </div>
             </div>
         </div>

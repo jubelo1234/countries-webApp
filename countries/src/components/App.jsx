@@ -8,6 +8,7 @@ import downDark from "../images/darrDark.svg";
 import { useState, useEffect } from "react";
 import countryData from "../data";
 import Card from "./Card";
+import InfoPage from "./InfoPage";
 
 function App() {
   const [theme, setTheme] = useState(true);
@@ -47,30 +48,10 @@ function App() {
     localStorage.setItem("selectedTheme", theme);
   }
 
-  const testData = countryData.find((item) =>
-    item.name.toLowerCase().includes("united states of america")
-  );
   const testData1 = countryData.find((item) =>
-    item.name.toLowerCase().includes("germany")
+    item.name.toLowerCase().includes("vatican")
   );
-  const testData2 = countryData.find((item) =>
-    item.name.toLowerCase().includes("monaco")
-  );
-  const testData3 = countryData.find((item) =>
-    item.name.toLowerCase().includes("mexico")
-  );
-  const testData4 = countryData.find((item) =>
-    item.name.toLowerCase().includes("spain")
-  );
-  const testData5 = countryData.find((item) =>
-    item.name.toLowerCase().includes("malaysia")
-  );
-  const testData6 = countryData.find((item) =>
-    item.name.toLowerCase().includes("albania")
-  );
-  const testData7 = countryData.find((item) =>
-    item.name.toLowerCase().includes("canada")
-  );
+
 
   return (
     <div
@@ -91,19 +72,13 @@ function App() {
         </div>
       </div>
       <div className="pt-[30px] lap:pt-[50px] px-[5vw] max-w-[1710px] mx-auto">
-        <div className="flex items-baseline flex-col justify-start gap-6 lap:flex-row lap:justify-between">
+        <div className=" hidden items-baseline flex-col justify-start mt-12 gap-6 lap:flex-row lap:justify-between">
           <Search theme={theme} />
           <Region theme={theme} />
         </div>
-        <div className="flex pb-10 items-center justify-center tlap:justify-center mt-12 lap:mt-12 gap-10 sm:gap-14 tlap:gap-[80px] flex-wrap">
-          <Card data={testData1} theme={theme} />
-          <Card data={testData} theme={theme} />
-          <Card data={testData2} theme={theme} />
-          <Card data={testData3} theme={theme} />
-          <Card data={testData4} theme={theme} />
-          <Card data={testData5} theme={theme} />
-          <Card data={testData6} theme={theme} />
-          <Card data={testData7} theme={theme} />
+        <div className="flex pb-10 items-center justify-center tlap:justify-center  gap-10 sm:gap-14 tlap:gap-[80px] flex-wrap">
+          {/* <Card data={testData1} theme={theme} /> */}
+          <InfoPage data={testData1} theme={theme}/>
         </div>
       </div>
     </div>
