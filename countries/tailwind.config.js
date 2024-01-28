@@ -13,9 +13,11 @@ export default {
       screens: {
         exsm: "350px",
         eexsm: "290px",
+        mbt: "500px",
         tab: "768px",
         lap: "1125px",
-        tlap: "1467px"
+        tlap: "1467px",
+        ttlap: "1200px"
       },
       fontFamily: {
         sans: ["Nunito Sans", "sans-serif"],

@@ -49,7 +49,7 @@ function App() {
   }
 
   const testData1 = countryData.find((item) =>
-    item.name.toLowerCase().includes("switzerland")
+    item.name.toLowerCase().includes("russia")
   );
 
 
@@ -59,7 +59,7 @@ function App() {
         themeLoaded ? "" : "hidden"
       } bg-vlGray dark:bg-vdBlue min-h-screen w-screen text-vdBlueTxt dark:text-white`}
     >
-      <div className="flex sticky top-0 justify-between z-20 text-vdBlueTxt dark:text-white items-center bg-white px-[5vw] py-4 dark:bg-dBlue">
+      <div className="flex sticky top-0 justify-between z-20 text-vdBlueTxt dark:text-white items-center bg-white px-[5vw] tlap:px-[4vw] py-4 dark:bg-dBlue">
         <h3 className=" font-extrabold text-[14px] exsm:text-[16.5px] lap:text-[22px]">
           Where in the world?
         </h3>
@@ -71,7 +71,7 @@ function App() {
           <h4>{`${!theme ? "Dark" : "Light"} Mode`}</h4>
         </div>
       </div>
-      <div className="pt-[30px] lap:pt-[50px] px-[5vw] max-w-[1710px] mx-auto">
+      <div className="pt-[30px] lap:pt-[50px] px-[5vw] tlap:px-[2vw] max-w-[1710px] mx-auto">
         <div className=" mb-16 hidden items-baseline flex-col justify-start  gap-6 lap:flex-row lap:justify-between">
           <Search theme={theme} />
           <Region theme={theme} />
