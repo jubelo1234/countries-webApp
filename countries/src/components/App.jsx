@@ -49,7 +49,7 @@ function App() {
   }
 
   const testData1 = countryData.find((item) =>
-    item.name.toLowerCase().includes("russia")
+    item.name.toLowerCase().includes("china")
   );
 
 

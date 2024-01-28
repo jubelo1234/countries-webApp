@@ -1,11 +1,28 @@
 import lBack from "../images/lightB.png";
 import dBack from "../images/darkB.png";
 import countryData from "../data";
+import { useState, useEffect } from "react";
 
 function InfoPage({ data, theme }) {
   console.log(data);
   const population = data.population;
   const domain = data.topLevelDomain?.join(", ");
+
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); 
+
+  const flagImg = screenWidth >= 1200 ? data.flags.svg : data.flags.png;
 
   const currencyNames = data.currencies
     ?.map((currency) => currency.name)
@@ -14,21 +31,24 @@ function InfoPage({ data, theme }) {
 
   return (
     <div className="w-[95%] mt-3 lap:mt-0">
+
       <button className="border-none bg-transparent font-light bg-white dark:bg-dBlue shadow-3xl dark:shadow-none mr-auto rounded-[5px]">
-        <div className="flex justify-center items-center gap-[6px] py-[6px] px-6 ">
-          <img className="w-[25px]" alt="back" src={theme ? lBack : dBack} />{" "}
+        <div className="flex justify-center items-center text-[14px] exsm:text-[16px] gap-[6px] py-[6px] px-6 ">
+          <img className="w-[22px] exsm:w-[25px]" alt="back" src={theme ? lBack : dBack} />{" "}
           <p>Back</p>
         </div>
       </button>
+
+
       <div className="mt-12 ttlap:flex ttlap:items-center ttlap:justify-between ttlap:w-full">
         <img
           alt="flag"
-          src={data.flags.svg}
+          src={flagImg}
           className={` ${
             data.name === "Nepal" || data.name === "Switzerland"
               ? ""
               : "w-full ttlap:w-[43%]"
-          } max-h-[180px] max-w-[462px] ttlap:max-w-full mx-auto  exsm:min-h-[180px] exsm:max-h-[230px] ttlap:mr-auto ttlap:ml-0 mbt:max-h-[250px] ttlap:max-h-[420px] shadow-3xl dark:shadow-none`}
+          } max-h-[180px] max-w-[462px] ttlap:max-w-full mx-auto  exsm:min-h-[180px] exsm:max-h-[230px] ttlap:mr-auto ttlap:ml-0 mbt:max-h-[270px] ttlap:max-h-[420px] shadow-3xl dark:shadow-none`}
         />
         <div className="sm:w-[500px] tab:w-[600px] mx-auto ttlap:w-[43%]">
           <h2 className="pb-[26px] pt-10 sm:pt-16 ttlap:pt-0 text-[20px] exsm:text-[24px] ttlap:text-[34px]  font-bold capitalize">
@@ -92,7 +112,7 @@ function InfoPage({ data, theme }) {
                   return (
                     <p
                       key={index}
-                      className="bg-white text-[14px] capitalize dark:bg-dBlue shadow-3xl dark:shadow-none w-[30%] ttlap:w-fit rounded-[3px] min-w-fit px-4 py-[5px]"
+                      className="bg-white text-[13px] exsm:text-[14px] capitalize dark:bg-dBlue shadow-3xl dark:shadow-none w-[30%] ttlap:w-fit rounded-[3px] min-w-fit px-4 py-[5px]"
                     >
                       {borderCountry.name}
                     </p>

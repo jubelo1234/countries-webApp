@@ -39,3 +39,13 @@ input[type="search"] {
   -webkit-appearance: none;
   text-decoration: none;
 }
+
+::-webkit-scrollbar {
+  width: 0;
+  display: none; 
+}
+
+
+* {
+  scrollbar-width: none;
+}
