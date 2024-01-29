@@ -96,6 +96,10 @@ function InfoPage({ data, theme }) {
                 Languages: &nbsp;
                 <span className="font-extralight">{language}</span>
               </p>
+              <p>
+                Independent: &nbsp;
+                <span className="font-extralight">{data.independent ? "Yes" : "No"}</span>
+              </p>
             </div>
           </div>
           <div className="flex mt-12 items-start justify-start flex-wrap w-full gap-x-5 mb-3 gap-y-4">

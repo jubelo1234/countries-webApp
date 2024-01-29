@@ -14,8 +14,10 @@ function App() {
   const [theme, setTheme] = useState(true);
   const [themeLoaded, setThemeLoaded] = useState(false);
   const [shuffledArray, setShuffledArray] = useState([]);
+  const [search, setSearch] = useState("");
+  const [region, setRegion] = useState("");
 
-  const [home, setHome] = useState(true)
+  const [home, setHome] = useState(true);
 
   const moon = theme ? lightMoon : darkMoon;
 
@@ -45,6 +47,18 @@ function App() {
     setShuffledArray(shuffleArray([...countryData]));
   }, []);
 
+  // filter using the search
+  const searchedData =
+    search.trim() !== ""
+      ? shuffledArray.filter((item) => item.name.toLowerCase().includes(search))
+      : shuffledArray;
+
+  const regionData =
+    region === "" || region === "all"
+      ? searchedData
+      : searchedData.filter(
+          (item) => item.region.toLowerCase() === region.toLowerCase()
+        );
   // Function to apply the selected theme
   function applyTheme(theme) {
     const rootElement = document.documentElement;
@@ -64,7 +78,7 @@ function App() {
   }
 
   const testData1 = countryData.find((item) =>
-    item.name.toLowerCase().includes("switzerland")
+    item.name.toLowerCase().includes("nepal")
   );
 
   return (
@@ -86,13 +100,17 @@ function App() {
         </div>
       </div>
       <div className="pt-[30px] lap:pt-[50px] px-[5vw] tlap:px-[2vw] max-w-[1710px] mx-auto">
-        <div className={` mb-16 ${home ? "flex" : "hidden"} items-baseline flex-col justify-start  gap-6 lap:flex-row lap:justify-between`}>
-          <Search theme={theme} />
-          <Region theme={theme} />
+        <div
+          className={` mb-16 ${
+            home ? "flex" : "hidden"
+          } items-baseline flex-col justify-start  gap-6 lap:flex-row lap:justify-between`}
+        >
+          <Search setVal={setSearch} val={search} theme={theme} />
+          <Region theme={theme} set={setRegion} regn={region} />
         </div>
         <div className="flex pb-10 items-center justify-center tlap:justify-center  gap-10 sm:gap-14 tlap:gap-[80px] flex-wrap">
-          {shuffledArray.map((item, key) => (
-            <Card data={item} theme={theme} key={key}/>
+          {regionData.map((item, key) => (
+            <Card data={item} theme={theme} key={key} />
           ))}
           {/* <InfoPage data={testData1} theme={theme} /> */}
         </div>
@@ -101,8 +119,12 @@ function App() {
   );
 }
 
-function Search({ theme }) {
+function Search({ theme, setVal, val }) {
   const searchImg = theme ? lightSearch : darkSearch;
+
+  function handleChange(e) {
+    setVal(e.target.value);
+  }
   return (
     <div
       id="sec"
@@ -115,6 +137,8 @@ function Search({ theme }) {
       />
       <input
         type="search"
+        value={val}
+        onChange={handleChange}
         placeholder="Search for a country.."
         className=" w-full text-[14px] exsm:text-[16.5px] border-none bg-transparent text-vdBlueTxt dark:text-white py-[2px] pl-[2px]"
       />
@@ -122,11 +146,16 @@ function Search({ theme }) {
   );
 }
 
-function Region({ theme }) {
+function Region({ theme, set, regn }) {
   const [show, setShow] = useState(false);
 
   function handleDrop() {
     setShow(!show);
+  }
+
+  function handleClick(e) {
+    set(e.target.value);
+    handleDrop();
   }
   return (
     <div className="flex shadow-3xl dark:shadow-none max-w-[250px] lap:h-[55px] cursor-pointer relative text-[14px] sm:text-[16px] py-3 px-5 dark:bg-dBlue bg-white font-light justify-center items-center w-[60%] rounded-[5px]">
@@ -134,7 +163,10 @@ function Region({ theme }) {
         onClick={handleDrop}
         className="w-full h-full flex items-center justify-between"
       >
-        <h3>Filter by Region</h3>
+        <h3 className=" capitalize">
+          {regn === "" ? "Filter by Region" : regn}
+        </h3>
+
         <img src={theme ? downLight : downDark} className="w-[12px]" />
       </div>
       <div
@@ -142,11 +174,24 @@ function Region({ theme }) {
           show ? "flex" : "hidden"
         } flex-col h-fit gap-2 sm:gap-3 items-baseline bg-white font-light" id="drop`}
       >
-        <button value="africa">Africa</button>
-        <button value="America">America</button>
-        <button value="Asia">Asia</button>
-        <button value="Europe">Europe</button>
-        <button value="Oceania">Oceania</button>
+        <button onClick={handleClick} value="africa">
+          Africa
+        </button>
+        <button onClick={handleClick} value="Americas">
+          America
+        </button>
+        <button onClick={handleClick} value="Asia">
+          Asia
+        </button>
+        <button onClick={handleClick} value="Europe">
+          Europe
+        </button>
+        <button onClick={handleClick} value="Oceania">
+          Oceania
+        </button>
+        <button onClick={handleClick} value="all">
+          All
+        </button>
       </div>
     </div>
   );
