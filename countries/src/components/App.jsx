@@ -13,6 +13,9 @@ import InfoPage from "./InfoPage";
 function App() {
   const [theme, setTheme] = useState(true);
   const [themeLoaded, setThemeLoaded] = useState(false);
+  const [shuffledArray, setShuffledArray] = useState([]);
+
+  const [home, setHome] = useState(true)
 
   const moon = theme ? lightMoon : darkMoon;
 
@@ -28,6 +31,18 @@ function App() {
     }
 
     setThemeLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    const shuffleArray = (array) => {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    };
+
+    setShuffledArray(shuffleArray([...countryData]));
   }, []);
 
   // Function to apply the selected theme
@@ -49,9 +64,8 @@ function App() {
   }
 
   const testData1 = countryData.find((item) =>
-    item.name.toLowerCase().includes("china")
+    item.name.toLowerCase().includes("switzerland")
   );
-
 
   return (
     <div
@@ -72,13 +86,15 @@ function App() {
         </div>
       </div>
       <div className="pt-[30px] lap:pt-[50px] px-[5vw] tlap:px-[2vw] max-w-[1710px] mx-auto">
-        <div className=" mb-16 hidden items-baseline flex-col justify-start  gap-6 lap:flex-row lap:justify-between">
+        <div className={` mb-16 ${home ? "flex" : "hidden"} items-baseline flex-col justify-start  gap-6 lap:flex-row lap:justify-between`}>
           <Search theme={theme} />
           <Region theme={theme} />
         </div>
         <div className="flex pb-10 items-center justify-center tlap:justify-center  gap-10 sm:gap-14 tlap:gap-[80px] flex-wrap">
-          {/* <Card data={testData1} theme={theme} /> */}
-          <InfoPage data={testData1} theme={theme}/>
+          {shuffledArray.map((item, key) => (
+            <Card data={item} theme={theme} key={key}/>
+          ))}
+          {/* <InfoPage data={testData1} theme={theme} /> */}
         </div>
       </div>
     </div>
@@ -113,15 +129,18 @@ function Region({ theme }) {
     setShow(!show);
   }
   return (
-    <div className="flex shadow-3xl dark:shadow-none max-w-[250px] lap:h-[55px] cursor-pointer relative text-[14px] py-3 px-5 dark:bg-dBlue bg-white font-light justify-center items-center w-[60%] rounded-[5px]">
-      <div onClick={handleDrop} className="w-full h-full flex items-center justify-between">
+    <div className="flex shadow-3xl dark:shadow-none max-w-[250px] lap:h-[55px] cursor-pointer relative text-[14px] sm:text-[16px] py-3 px-5 dark:bg-dBlue bg-white font-light justify-center items-center w-[60%] rounded-[5px]">
+      <div
+        onClick={handleDrop}
+        className="w-full h-full flex items-center justify-between"
+      >
         <h3>Filter by Region</h3>
         <img src={theme ? downLight : downDark} className="w-[12px]" />
       </div>
       <div
         className={`absolute top-[115%] left-0 py-4 px-6 rounded-[5px] w-full dark:bg-dBlue ${
           show ? "flex" : "hidden"
-        } flex-col h-fit gap-2 items-baseline bg-white font-light" id="drop`}
+        } flex-col h-fit gap-2 sm:gap-3 items-baseline bg-white font-light" id="drop`}
       >
         <button value="africa">Africa</button>
         <button value="America">America</button>

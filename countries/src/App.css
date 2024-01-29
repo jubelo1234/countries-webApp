@@ -26,7 +26,7 @@ input[type="search"]::-webkit-search-clear-button {
 }
 
 .bords{
-    border-top: 2px solid hsl(0, 0%, 98%);
+    border-top: 4px solid hsl(0, 0%, 98%);
 }
 
 input[type="search"]::-webkit-search-decoration,
@@ -40,12 +40,23 @@ input[type="search"] {
   text-decoration: none;
 }
 
+/* For WebKit (Chrome, Safari) */
 ::-webkit-scrollbar {
-  width: 0;
-  display: none; 
+  width: 12px;
+  padding: 5px;
 }
 
+::-webkit-scrollbar-thumb {
+  background-color:  grey;
+}
 
+::-webkit-scrollbar-track {
+  background: transparent; /* No background */
+}
+
+/* For Firefox */
 * {
-  scrollbar-width: none;
+  scrollbar-color: gray transparent; /* Green thumb, no background */
+  scrollbar-width: thin;
 }
+
