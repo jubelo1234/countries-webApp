@@ -27,7 +27,6 @@ function App() {
 
   const moon = theme ? lightMoon : darkMoon;
 
-
   useEffect(() => {
     const savedTheme = localStorage.getItem("selectedTheme");
     if (savedTheme) {
@@ -67,6 +66,7 @@ function App() {
       : searchedData.filter(
           (item) => item.region.toLowerCase() === region.toLowerCase()
         );
+
   // Function to apply the selected theme
   function applyTheme(theme) {
     const rootElement = document.documentElement;
@@ -85,7 +85,7 @@ function App() {
     localStorage.setItem("selectedTheme", theme);
   }
 
-  function toTop(){
+  function toTop() {
     window.scrollTo(0, 0);
   }
 
@@ -103,7 +103,10 @@ function App() {
       } bg-vlGray dark:bg-vdBlue min-h-screen w-screen text-vdBlueTxt dark:text-white`}
     >
       <div className="flex sticky top-0 justify-between z-20 text-vdBlueTxt dark:text-white items-center bg-white px-[5vw] tlap:px-[4vw] py-4 dark:bg-dBlue">
-        <h3 onClick={toTop} className=" font-extrabold cursor-pointer text-[14px] exsm:text-[16.5px] lap:text-[22px]">
+        <h3
+          onClick={toTop}
+          className=" font-extrabold cursor-pointer text-[14px] exsm:text-[16.5px] lap:text-[22px]"
+        >
           Where in the world?
         </h3>
         <div
@@ -115,8 +118,15 @@ function App() {
         </div>
       </div>
       {home && (
-        <div onClick={toTop} className="rounded-[50%] border-2 tlap:border-3 border-yellow-300 fixed bottom-[20px] right-[5vw] ttlap:right-[14px] w-fit h-fit p-3 bg-white dark:bg-dBlue shadow-3xl dark:shadow-none tbtn">
-          <img alt="top" src={!theme ? darkUp : lightUp} className="w-[18px] exsm:w-[22px] sm:w-[25px]" />
+        <div
+          onClick={toTop}
+          className="rounded-[50%] border-2 tlap:border-3 border-yellow-300 fixed bottom-[20px] right-[5vw] ttlap:right-[14px] w-fit h-fit p-3 bg-white dark:bg-dBlue shadow-3xl dark:shadow-none tbtn"
+        >
+          <img
+            alt="top"
+            src={!theme ? darkUp : lightUp}
+            className="w-[18px] exsm:w-[22px] sm:w-[25px]"
+          />
         </div>
       )}
       <div className="pt-[30px] lap:pt-[50px] px-[5vw] tlap:px-[2vw] max-w-[1710px] mx-auto">
@@ -130,16 +140,32 @@ function App() {
         </div>
         <div className="flex pb-9 items-center justify-center tlap:justify-center  gap-10 sm:gap-14 tlap:gap-[80px] flex-wrap">
           {home ? (
-            <HomePage
-              data={regionData}
-              theme={theme}
-              setHome={setHome}
-              setCountry={setInner}
-              scrll={scrollPositionRef}
-            />
+            search.trim() !== "" && regionData < 1 ? (
+              <div className="w-full h-[30vh] flex flex-col items-center justify-center">
+                <h1 className="capitalize text-[34px] sm:text-[44px] font-bold text-center">
+                  Not found!
+                </h1>
+                <p className="capitalize text-center text-[14px] exsm:text-[16px] sm:text-[18px]">
+                  Try searching for another Country
+                </p>
+              </div>
+            ) : (
+              <HomePage
+                data={regionData}
+                theme={theme}
+                setHome={setHome}
+                setCountry={setInner}
+                scrll={scrollPositionRef}
+              />
+            )
           ) : (
             innerPageData && (
-              <InfoPage data={innerPageData} theme={theme} setHom={setHome} />
+              <InfoPage
+                data={innerPageData}
+                theme={theme}
+                setHom={setHome}
+                setCountry={setInner}
+              />
             )
           )}
         </div>

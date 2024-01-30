@@ -4,7 +4,7 @@ import countryData from "../data";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
-function InfoPage({ data, theme, setHom }) {
+function InfoPage({ data, theme, setHom, setCountry }) {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -35,6 +35,11 @@ function InfoPage({ data, theme, setHom }) {
 
   function handleBack() {
     setHom(true);
+  }
+
+  function handleCountry(e){
+    setCountry(e.target.value);
+    window.scrollTo(0, 0);
   }
 
   const flagVars = {
@@ -116,13 +121,13 @@ function InfoPage({ data, theme, setHom }) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className={` ${
-              data.name === "Nepal" || data.name === "Switzerland"
-                ? "ttlap:mx-auto"
-                : "w-full ttlap:mr-auto ttlap:ml-0"
-            } max-h-[180px] ttlap:w-[43%] max-w-[462px] ttlap:max-w-full mx-auto  exsm:min-h-[180px] exsm:max-h-[230px]  mbt:max-h-[270px] ttlap:max-h-[420px] shadow-3xl dark:shadow-none`}
+            className={` max-h-[180px] ttlap:w-[43%] max-w-[462px] ttlap:max-w-full  mx-auto exsm:min-h-[180px] exsm:max-h-[230px]  mbt:max-h-[270px] ttlap:max-h-[420px] `}
           >
-            <img alt="flag" src={flagImg} className="w-full h-full" />
+            <img alt="flag" src={flagImg} className={` ${
+              data.name === "Nepal" || data.name === "Switzerland"
+                ? "ttlap:mx-auto h-full w-[50%]"
+                : "w-full h-full max-h-full ttlap:mr-auto ttlap:ml-0"
+            } mx-auto shadow-3xl dark:shadow-none exsm:min-h-[180px] exsm:max-h-[230px]  mbt:max-h-[270px] ttlap:max-h-[420px]`} />
           </motion.div>
           <motion.div
             key={data.demonym}
@@ -201,12 +206,14 @@ function InfoPage({ data, theme, setHom }) {
                     );
 
                     return (
-                      <p
+                      <button
                         key={index}
-                        className="bg-white text-[13px] exsm:text-[14px] tlap:text-[14px] capitalize dark:bg-dBlue shadow-3xl dark:shadow-none w-[30%] ttlap:w-fit rounded-[3px] min-w-fit px-4 py-[5px]"
+                        onClick={handleCountry}
+                        value={borderCountry.name}
+                        className="bg-white text-[13px] cursor-pointer border-none outline-none m-0 exsm:text-[14px] tlap:text-[14px] capitalize dark:bg-dBlue shadow-3xl dark:shadow-none w-[30%] ttlap:w-fit rounded-[3px] min-w-fit px-4 py-[5px]"
                       >
                         {borderCountry.name}
-                      </p>
+                      </button>
                     );
                   })}
                 </div>
