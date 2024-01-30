@@ -2,6 +2,11 @@
   outline: none;
 }
 
+html, body {
+  scroll-behavior: smooth;
+}
+
+
 /* Hide the cancel button in a search input */
 input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
@@ -14,6 +19,12 @@ input[type="search"]::-webkit-search-clear-button {
   -webkit-appearance: none;
   appearance: none;
   display: none;
+}
+
+@media (min-width: 425px) and (max-width: 440px) {
+  .tbtn{
+    right: 1.7vw;
+  }
 }
 
 

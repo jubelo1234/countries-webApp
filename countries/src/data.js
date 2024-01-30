@@ -15993,7 +15993,7 @@
     "independent": true
   },
   {
-    "name": "United Kingdom of Great Britain and Northern Ireland",
+    "name": "United Kingdom of Great Britain",
     "topLevelDomain": [".uk"],
     "alpha2Code": "GB",
     "alpha3Code": "GBR",

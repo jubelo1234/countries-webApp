@@ -5,10 +5,13 @@ import lightSearch from "../images/lightS.png";
 import darkSearch from "../images/darkS.png";
 import downLight from "../images/darrLight.svg";
 import downDark from "../images/darrDark.svg";
-import { useState, useEffect, useMemo } from "react";
+import darkUp from "../images/darkUp.png";
+import lightUp from "../images/lighUp.png";
+import { useState, useEffect, useMemo, useRef } from "react";
 import countryData from "../data";
 import Card from "./Card";
 import InfoPage from "./InfoPage";
+import HomePage from "./HomePage";
 
 function App() {
   const [theme, setTheme] = useState(true);
@@ -17,10 +20,13 @@ function App() {
   const [search, setSearch] = useState("");
   const [region, setRegion] = useState("");
 
+  const scrollPositionRef = useRef(0);
+
   const [home, setHome] = useState(true);
   const [inner, setInner] = useState("nepal");
 
   const moon = theme ? lightMoon : darkMoon;
+
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("selectedTheme");
@@ -79,11 +85,16 @@ function App() {
     localStorage.setItem("selectedTheme", theme);
   }
 
+  function toTop(){
+    window.scrollTo(0, 0);
+  }
+
   const innerPageData =
     inner.trim() !== ""
-      ? countryData.find((item) => item.name.toLowerCase().includes(inner.toLowerCase()))
+      ? countryData.find(
+          (item) => item.name.toLowerCase() === inner.toLowerCase()
+        )
       : null;
-
 
   return (
     <div
@@ -92,7 +103,7 @@ function App() {
       } bg-vlGray dark:bg-vdBlue min-h-screen w-screen text-vdBlueTxt dark:text-white`}
     >
       <div className="flex sticky top-0 justify-between z-20 text-vdBlueTxt dark:text-white items-center bg-white px-[5vw] tlap:px-[4vw] py-4 dark:bg-dBlue">
-        <h3 className=" font-extrabold text-[14px] exsm:text-[16.5px] lap:text-[22px]">
+        <h3 onClick={toTop} className=" font-extrabold text-[14px] exsm:text-[16.5px] lap:text-[22px]">
           Where in the world?
         </h3>
         <div
@@ -103,6 +114,11 @@ function App() {
           <h4>{`${!theme ? "Dark" : "Light"} Mode`}</h4>
         </div>
       </div>
+      {home && (
+        <div onClick={toTop} className="rounded-[50%] border-2 tlap:border-3 border-yellow-300 fixed bottom-[20px] right-[5vw] ttlap:right-[14px] w-fit h-fit p-3 bg-white dark:bg-dBlue shadow-3xl dark:shadow-none tbtn">
+          <img alt="top" src={!theme ? darkUp : lightUp} className="w-[18px] exsm:w-[22px] sm:w-[25px]" />
+        </div>
+      )}
       <div className="pt-[30px] lap:pt-[50px] px-[5vw] tlap:px-[2vw] max-w-[1710px] mx-auto">
         <div
           className={` mb-16 ${
@@ -112,19 +128,19 @@ function App() {
           <Search setVal={setSearch} val={search} theme={theme} />
           <Region theme={theme} set={setRegion} regn={region} />
         </div>
-        <div className="flex pb-10 items-center justify-center tlap:justify-center  gap-10 sm:gap-14 tlap:gap-[80px] flex-wrap">
+        <div className="flex pb-9 items-center justify-center tlap:justify-center  gap-10 sm:gap-14 tlap:gap-[80px] flex-wrap">
           {home ? (
-            regionData.map((item, key) => (
-              <Card
-                data={item}
-                theme={theme}
-                key={key}
-                setHom={setHome}
-                setCountry={setInner}
-              />
-            ))
+            <HomePage
+              data={regionData}
+              theme={theme}
+              setHome={setHome}
+              setCountry={setInner}
+              scrll={scrollPositionRef}
+            />
           ) : (
-            innerPageData && <InfoPage data={innerPageData} theme={theme} setHom={setHome} />            
+            innerPageData && (
+              <InfoPage data={innerPageData} theme={theme} setHom={setHome} />
+            )
           )}
         </div>
       </div>
@@ -191,7 +207,7 @@ function Region({ theme, set, regn }) {
           Africa
         </button>
         <button onClick={handleClick} value="Americas">
-          America
+          Americas
         </button>
         <button onClick={handleClick} value="Asia">
           Asia
