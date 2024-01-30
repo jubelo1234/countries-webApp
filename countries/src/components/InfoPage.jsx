@@ -3,8 +3,8 @@ import dBack from "../images/darkB.png";
 import countryData from "../data";
 import { useState, useEffect } from "react";
 
-function InfoPage({ data, theme }) {
-  console.log(data);
+function InfoPage({ data, theme, setHom }) {
+  
   const population = data.population;
   const domain = data.topLevelDomain?.join(", ");
 
@@ -29,10 +29,14 @@ function InfoPage({ data, theme }) {
     .join(", ");
   const language = data.languages?.map((currency) => currency.name).join(", ");
 
+  function handleBack(){
+    setHom(true);
+  }
+
   return (
     <div className="w-[95%] mt-3 lap:mt-0">
 
-      <button className="border-none bg-transparent font-light bg-white dark:bg-dBlue shadow-3xl dark:shadow-none mr-auto rounded-[5px]">
+      <button onClick={handleBack} className="border-none bg-transparent font-light bg-white dark:bg-dBlue shadow-3xl dark:shadow-none mr-auto rounded-[5px]">
         <div className="flex justify-center items-center text-[14px] exsm:text-[16px] gap-[6px] py-[6px] px-6 ">
           <img className="w-[22px] exsm:w-[25px]" alt="back" src={theme ? lBack : dBack} />{" "}
           <p>Back</p>
@@ -98,7 +102,7 @@ function InfoPage({ data, theme }) {
               </p>
               <p>
                 Independent: &nbsp;
-                <span className="font-extralight">{data.independent ? "Yes" : "No"}</span>
+                <span className={`font-bold ${data.independent ? "text-green-400" : "text-red-600"}`}>{data.independent ? "Yes" : "No"}</span>
               </p>
             </div>
           </div>
@@ -124,7 +128,7 @@ function InfoPage({ data, theme }) {
                 })}
               </div>
             ) : (
-              "None"
+              <p className="text-[17px] exsm:text-[20px] font-medium">None</p>
             )}
           </div>
         </div>

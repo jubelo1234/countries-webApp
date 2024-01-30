@@ -5,7 +5,7 @@ import lightSearch from "../images/lightS.png";
 import darkSearch from "../images/darkS.png";
 import downLight from "../images/darrLight.svg";
 import downDark from "../images/darrDark.svg";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import countryData from "../data";
 import Card from "./Card";
 import InfoPage from "./InfoPage";
@@ -18,6 +18,7 @@ function App() {
   const [region, setRegion] = useState("");
 
   const [home, setHome] = useState(true);
+  const [inner, setInner] = useState("nepal");
 
   const moon = theme ? lightMoon : darkMoon;
 
@@ -48,10 +49,11 @@ function App() {
   }, []);
 
   // filter using the search
-  const searchedData =
-    search.trim() !== ""
+  const searchedData = useMemo(() => {
+    return search.trim() !== ""
       ? shuffledArray.filter((item) => item.name.toLowerCase().includes(search))
       : shuffledArray;
+  }, [search, shuffledArray]);
 
   const regionData =
     region === "" || region === "all"
@@ -77,9 +79,11 @@ function App() {
     localStorage.setItem("selectedTheme", theme);
   }
 
-  const testData1 = countryData.find((item) =>
-    item.name.toLowerCase().includes("nepal")
-  );
+  const innerPageData =
+    inner.trim() !== ""
+      ? countryData.find((item) => item.name.toLowerCase().includes(inner.toLowerCase()))
+      : null;
+
 
   return (
     <div
@@ -109,10 +113,19 @@ function App() {
           <Region theme={theme} set={setRegion} regn={region} />
         </div>
         <div className="flex pb-10 items-center justify-center tlap:justify-center  gap-10 sm:gap-14 tlap:gap-[80px] flex-wrap">
-          {regionData.map((item, key) => (
-            <Card data={item} theme={theme} key={key} />
-          ))}
-          {/* <InfoPage data={testData1} theme={theme} /> */}
+          {home ? (
+            regionData.map((item, key) => (
+              <Card
+                data={item}
+                theme={theme}
+                key={key}
+                setHom={setHome}
+                setCountry={setInner}
+              />
+            ))
+          ) : (
+            innerPageData && <InfoPage data={innerPageData} theme={theme} setHom={setHome} />            
+          )}
         </div>
       </div>
     </div>
