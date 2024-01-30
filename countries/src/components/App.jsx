@@ -103,12 +103,12 @@ function App() {
       } bg-vlGray dark:bg-vdBlue min-h-screen w-screen text-vdBlueTxt dark:text-white`}
     >
       <div className="flex sticky top-0 justify-between z-20 text-vdBlueTxt dark:text-white items-center bg-white px-[5vw] tlap:px-[4vw] py-4 dark:bg-dBlue">
-        <h3 onClick={toTop} className=" font-extrabold text-[14px] exsm:text-[16.5px] lap:text-[22px]">
+        <h3 onClick={toTop} className=" font-extrabold cursor-pointer text-[14px] exsm:text-[16.5px] lap:text-[22px]">
           Where in the world?
         </h3>
         <div
           onClick={handleChange}
-          className="flex text-[14px] exsm:text-[16px] items-center font-semibold justify-center"
+          className="flex text-[14px] cursor-pointer exsm:text-[16px] items-center font-semibold justify-center"
         >
           <img src={moon} alt="theme" className="w-[32px] exsm:w-[40px]" />
           <h4>{`${!theme ? "Dark" : "Light"} Mode`}</h4>

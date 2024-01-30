@@ -2,13 +2,10 @@ import lBack from "../images/lightB.png";
 import dBack from "../images/darkB.png";
 import countryData from "../data";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 function InfoPage({ data, theme, setHom }) {
-
-
-
   useEffect(() => {
-      
     window.scrollTo(0, 0);
   }, []);
 
@@ -21,8 +18,6 @@ function InfoPage({ data, theme, setHom }) {
     const handleResize = () => {
       setScreenWidth(window.innerWidth);
     };
-
-
 
     window.addEventListener("resize", handleResize);
 
@@ -42,6 +37,59 @@ function InfoPage({ data, theme, setHom }) {
     setHom(true);
   }
 
+  const flagVars = {
+    initial: {
+      opacity: 0,
+      scale: 1,
+      x: "-20%",
+    },
+    animate: {
+      scale: 1,
+      opacity: 1,
+      x: 0,
+
+      transition: {
+        ease: "easeInOut",
+        duration: 1,
+      },
+    },
+    exit: {
+      scale: 0.5,
+      opacity: 0,
+      x: "-20%",
+      transition: {
+        ease: "easeInOut",
+        duration: 0.5,
+      },
+    },
+  };
+  const textVars = {
+    initial: {
+      opacity: 0,
+      scale: 1,
+      x: "20%",
+    },
+    animate: {
+      scale: 1,
+      opacity: 1,
+      x: 0,
+
+      transition: {
+        ease: "easeInOut",
+        duration: 1,
+      },
+    },
+    exit: {
+      scale: 0.5,
+      opacity: 0,
+      x: "20%",
+      transition: {
+        ease: "easeInOut",
+        duration: 0.5,
+      },
+    },
+  };
+
   return (
     flagImg && (
       <div className="w-[95%] mt-3 lap:mt-0">
@@ -59,17 +107,31 @@ function InfoPage({ data, theme, setHom }) {
           </div>
         </button>
 
-        <div className={`mt-12 ttlap:mt-16 ttlap:flex ttlap:items-center ttlap:justify-between ttlap:w-full`}>
-          <img
-            alt="flag"
-            src={flagImg}
+        <div
+          className={`mt-12 ttlap:mt-16 ttlap:flex ttlap:items-center ttlap:justify-between ttlap:w-full`}
+        >
+          <motion.div
+            key={data.name}
+            variants={flagVars}
+            initial="initial"
+            animate="animate"
+            exit="exit"
             className={` ${
               data.name === "Nepal" || data.name === "Switzerland"
                 ? "ttlap:mx-auto"
                 : "w-full ttlap:mr-auto ttlap:ml-0"
             } max-h-[180px] ttlap:w-[43%] max-w-[462px] ttlap:max-w-full mx-auto  exsm:min-h-[180px] exsm:max-h-[230px]  mbt:max-h-[270px] ttlap:max-h-[420px] shadow-3xl dark:shadow-none`}
-          />
-          <div className="sm:w-[500px] tab:w-[600px] mx-auto ttlap:w-[43%]">
+          >
+            <img alt="flag" src={flagImg} className="w-full h-full" />
+          </motion.div>
+          <motion.div
+            key={data.demonym}
+            variants={textVars}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="sm:w-[500px] tab:w-[600px] mx-auto ttlap:w-[43%]"
+          >
             <h2 className="pb-[26px] pt-10 sm:pt-16 ttlap:pt-0 text-[20px] exsm:text-[24px] ttlap:text-[30px]  font-bold capitalize">
               {data.name}
             </h2>
@@ -152,7 +214,7 @@ function InfoPage({ data, theme, setHom }) {
                 <p className="text-[17px] exsm:text-[20px] font-medium">None</p>
               )}
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     )

@@ -2,9 +2,9 @@
   outline: none;
 }
 
-html, body {
+/* html, body{
   scroll-behavior: smooth;
-}
+} */
 
 
 /* Hide the cancel button in a search input */
