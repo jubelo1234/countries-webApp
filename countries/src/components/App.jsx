@@ -27,6 +27,8 @@ function App() {
 
   const moon = theme ? lightMoon : darkMoon;
 
+  console.log(countryData[1]);
+
   useEffect(() => {
     const savedTheme = localStorage.getItem("selectedTheme");
     if (savedTheme) {
@@ -56,12 +58,28 @@ function App() {
   // filter using the search
   const searchedData = useMemo(() => {
     return search.trim() !== ""
-      ? shuffledArray.filter(
-          (item) =>
-            item.name.toLowerCase().includes(search) ||
-            item.alpha2Code.toLowerCase().includes(search) ||
-            item.alpha3Code.toLowerCase().includes(search)
-        )
+      ? shuffledArray.filter((item) => {
+          const nameMatch = item.name
+            .toLowerCase()
+            .startsWith(search.toLowerCase());
+          const alpha2CodeMatch = item.alpha2Code
+            .toLowerCase()
+            .startsWith(search.toLowerCase());
+          const alpha3CodeMatch = item.alpha3Code
+            .toLowerCase()
+            .startsWith(search.toLowerCase());
+
+          let altSpellingsMatch = false;
+          if (item.altSpellings) {
+            altSpellingsMatch = item.altSpellings.some((spell) =>
+              spell.toLowerCase().startsWith(search.toLowerCase())
+            );
+          }
+
+          return (
+            nameMatch || alpha2CodeMatch || alpha3CodeMatch || altSpellingsMatch
+          );
+        })
       : shuffledArray;
   }, [search, shuffledArray]);
 
@@ -138,12 +156,12 @@ function App() {
         <div
           className={` mb-16 ${
             home ? "flex" : "hidden"
-          } items-baseline flex-col justify-start  gap-6 lap:flex-row lap:justify-between`}
+          } items-baseline flex-col justify-start tlap:w-[1380px] tlap:mx-auto  gap-6 lap:flex-row lap:justify-between`}
         >
           <Search setVal={setSearch} val={search} theme={theme} />
           <Region theme={theme} set={setRegion} regn={region} />
         </div>
-        <div className="flex pb-9 items-center justify-center tlap:justify-center  gap-10 sm:gap-14 tlap:gap-[80px] flex-wrap">
+        <div className="flex pb-9 items-center justify-center tlap:justify-center  gap-10 sm:gap-14 tlap:gap-[80px]  flex-wrap">
           {home ? (
             search.trim() !== "" && regionData < 1 ? (
               <div className="w-full h-[30vh] flex flex-col items-center justify-center">

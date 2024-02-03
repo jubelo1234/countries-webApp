@@ -47,8 +47,8 @@ input[type="search"]::-webkit-search-clear-button {
 }
 
 input[type="search"] {
+  text-decoration: none !important;
   -webkit-appearance: none;
-  text-decoration: none;
 }
 
 
@@ -61,6 +61,11 @@ input[type="search"] {
 /* For Firefox */
 * {
   scrollbar-width: none;
+}
+
+.card-grid{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 2fr));
 }
 
 

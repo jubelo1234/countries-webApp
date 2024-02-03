@@ -21,7 +21,7 @@ function HomePage({ data, theme, setHome, setCountry, scrll }) {
   }, [scrll]);
 
   return (
-    <div className="flex w-full items-center justify-center tlap:justify-center  gap-10 sm:gap-14 tlap:gap-[70px] flex-wrap">
+    <div className="flex w-full items-center justify-center tlap:justify-center  gap-10 sm:gap-14 tlap:gap-[60px] flex-wrap">
       {data.map((item, key) => (
         <Card
           data={item}
