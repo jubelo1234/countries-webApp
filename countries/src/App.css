@@ -51,23 +51,16 @@ input[type="search"] {
   text-decoration: none;
 }
 
-/* For WebKit (Chrome, Safari) */
+
+
 ::-webkit-scrollbar {
-  width: 12px;
-  padding: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color:  grey;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent; /* No background */
+  width: 0;
+  display: none;
 }
 
 /* For Firefox */
 * {
-  scrollbar-color: gray transparent; /* Green thumb, no background */
-  scrollbar-width: thin;
+  scrollbar-width: none;
 }
+
 

@@ -56,7 +56,12 @@ function App() {
   // filter using the search
   const searchedData = useMemo(() => {
     return search.trim() !== ""
-      ? shuffledArray.filter((item) => item.name.toLowerCase().includes(search))
+      ? shuffledArray.filter(
+          (item) =>
+            item.name.toLowerCase().includes(search) ||
+            item.alpha2Code.toLowerCase().includes(search) ||
+            item.alpha3Code.toLowerCase().includes(search)
+        )
       : shuffledArray;
   }, [search, shuffledArray]);
 
