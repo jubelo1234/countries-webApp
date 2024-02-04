@@ -62,15 +62,20 @@ function App() {
           const nameMatch = item.name
             .toLowerCase()
             .startsWith(search.toLowerCase());
-          const alpha2CodeMatch = item.alpha2Code
-            .toLowerCase()
-            .startsWith(search.toLowerCase());
-          const alpha3CodeMatch = item.alpha3Code
-            .toLowerCase()
-            .startsWith(search.toLowerCase());
+
+          let alpha2CodeMatch;
+          let alpha3CodeMatch;
+          if (search.length >= 2) {
+            alpha2CodeMatch = item.alpha2Code
+              .toLowerCase()
+              .startsWith(search.toLowerCase());
+            alpha3CodeMatch = item.alpha3Code
+              .toLowerCase()
+              .startsWith(search.toLowerCase());
+          }
 
           let altSpellingsMatch = false;
-          if (item.altSpellings) {
+          if (item.altSpellings && search.length >= 2) {
             altSpellingsMatch = item.altSpellings.some((spell) =>
               spell.toLowerCase().startsWith(search.toLowerCase())
             );
