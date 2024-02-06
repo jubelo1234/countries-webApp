@@ -27,8 +27,6 @@ function App() {
 
   const moon = theme ? lightMoon : darkMoon;
 
-  console.log(countryData[1]);
-
   useEffect(() => {
     const savedTheme = localStorage.getItem("selectedTheme");
     if (savedTheme) {

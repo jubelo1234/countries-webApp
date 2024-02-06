@@ -71,11 +71,9 @@ function InfoPage({ data, theme, setHom, setCountry }) {
   const textVars = {
     initial: {
       opacity: 0,
-      scale: 1,
       x: "20%",
     },
     animate: {
-      scale: 1,
       opacity: 1,
       x: 0,
 
@@ -85,7 +83,6 @@ function InfoPage({ data, theme, setHom, setCountry }) {
       },
     },
     exit: {
-      scale: 0.5,
       opacity: 0,
       x: "20%",
       transition: {
@@ -135,7 +132,7 @@ function InfoPage({ data, theme, setHom, setCountry }) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="sm:w-[500px] tab:w-[600px] mx-auto ttlap:w-[43%]"
+            className="sm:w-[500px] w-[90%] tab:w-[600px] sm:mx-auto ttlap:w-[43%]"
           >
             <h2 className="pb-[26px] pt-10 sm:pt-16 ttlap:pt-0 text-[20px] exsm:text-[24px] ttlap:text-[30px]  font-bold capitalize">
               {data.name}

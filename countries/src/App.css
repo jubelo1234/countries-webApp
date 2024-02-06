@@ -1,6 +1,21 @@
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
 #sec input {
   outline: none;
 }
+
+
+
+
 
 /* html, body{
   scroll-behavior: smooth;
@@ -67,5 +82,7 @@ input[type="search"] {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 2fr));
 }
+
+
 
 
