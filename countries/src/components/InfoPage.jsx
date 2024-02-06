@@ -125,9 +125,9 @@ function InfoPage({ data, theme, setHom, setCountry }) {
               src={flagImg}
               className={` ${
                 data.name === "Nepal" || data.name === "Switzerland"
-                  ? "ttlap:mx-auto h-full w-[70%] exsm:max-h-[250px]"
-                  : "w-full h-full max-h-full ttlap:mr-auto ttlap:ml-0 exsm:max-h-[230px]"
-              } mx-auto shadow-3xl dark:shadow-none exsm:min-h-[180px]   mbt:max-h-[270px] ttlap:max-h-[420px]`}
+                  ? "ttlap:mx-auto h-full w-[70%] exsm:max-h-[250px] shadow-none"
+                  : "w-full h-full max-h-full ttlap:mr-auto ttlap:ml-0 exsm:max-h-[230px] shadow-3xl"
+              } mx-auto  dark:shadow-none exsm:min-h-[180px]   mbt:max-h-[270px] ttlap:max-h-[420px]`}
             />
           </motion.div>
           <motion.div
