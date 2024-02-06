@@ -37,7 +37,7 @@ function InfoPage({ data, theme, setHom, setCountry }) {
     setHom(true);
   }
 
-  function handleCountry(e){
+  function handleCountry(e) {
     setCountry(e.target.value);
     window.scrollTo(0, 0);
   }
@@ -118,13 +118,17 @@ function InfoPage({ data, theme, setHom, setCountry }) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className={` max-h-[180px] ttlap:w-[43%] max-w-[462px] ttlap:max-w-full  mx-auto exsm:min-h-[180px] exsm:max-h-[230px]  mbt:max-h-[270px] ttlap:max-h-[420px] `}
+            className={` ${data.name === "Nepal" || data.name === "Switzerland" ? "max-h-[220px] exsm:max-h-[250px]" : "max-h-[180px] exsm:max-h-[230px]"} ttlap:w-[43%] max-w-[462px] ttlap:max-w-full  mx-auto exsm:min-h-[180px]   mbt:max-h-[270px] ttlap:max-h-[420px] `}
           >
-            <img alt="flag" src={flagImg} className={` ${
-              data.name === "Nepal" || data.name === "Switzerland"
-                ? "ttlap:mx-auto h-full w-[50%]"
-                : "w-full h-full max-h-full ttlap:mr-auto ttlap:ml-0"
-            } mx-auto shadow-3xl dark:shadow-none exsm:min-h-[180px] exsm:max-h-[230px]  mbt:max-h-[270px] ttlap:max-h-[420px]`} />
+            <img
+              alt="flag"
+              src={flagImg}
+              className={` ${
+                data.name === "Nepal" || data.name === "Switzerland"
+                  ? "ttlap:mx-auto h-full w-[70%] exsm:max-h-[250px]"
+                  : "w-full h-full max-h-full ttlap:mr-auto ttlap:ml-0 exsm:max-h-[230px]"
+              } mx-auto shadow-3xl dark:shadow-none exsm:min-h-[180px]   mbt:max-h-[270px] ttlap:max-h-[420px]`}
+            />
           </motion.div>
           <motion.div
             key={data.demonym}
